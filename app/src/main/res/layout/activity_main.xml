@@ -10,8 +10,8 @@
     <EditText
         android:id="@+id/port"
         android:layout_width="263dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="52dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
@@ -19,6 +19,7 @@
         android:text="5402"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/ip" />
 
@@ -26,9 +27,9 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="57dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
         android:text="IP:"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +39,9 @@
         android:id="@+id/textView2"
         android:layout_width="86dp"
         android:layout_height="54dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="56dp"
         android:text="Port:"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,16 +52,19 @@
         android:layout_width="172dp"
         android:layout_height="65dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="30dp"
         android:onClick="ConnectButton"
         android:text="Connect"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ip" />
+        app:layout_constraintTop_toBottomOf="@+id/port"
+        app:layout_constraintVertical_bias="0.592" />
 
     <EditText
         android:id="@+id/ip"
@@ -68,7 +72,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
@@ -76,7 +80,7 @@
         android:text="10.0.2.2"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
