@@ -10,7 +10,9 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import static android.content.ContentValues.TAG;
-
+ /*
+  This class responsible of the connection to the server.
+  */
 public class TcpClient {
 
     private String ip;
@@ -18,12 +20,17 @@ public class TcpClient {
     private Socket socket;
     private OutputStream stream;
 
-
+    /*
+     tcpClient constructor.
+     */
     public TcpClient(int port, String ip) {
         this.port = port;
         this.ip = ip;
     }
 
+    /*
+     This func responsible to connect and create socket.
+     */
     public void connect(){
         Runnable r = new Runnable() {
             @Override
@@ -31,12 +38,9 @@ public class TcpClient {
                 try {
                     Log.d(TAG, ip + port);
                     InetAddress serverAddr = InetAddress.getByName(ip);
-                    Log.d("TCP Client", serverAddr.toString());
-                    Log.d("TCP Client", "C: Connecting...");
                     socket = new Socket(serverAddr, port);
 
                     try {
-                        Log.d("TCP Client", "create the buffer");
                         stream = socket.getOutputStream();
 
                     } catch (Exception e) {
@@ -45,7 +49,6 @@ public class TcpClient {
                 } catch (Exception e) {
                     Log.e("TCP", "C: Error", e);
                 }
-                Log.d("TCP Client", "C: Connected succeeded");
             }
         };
         Thread thread = new Thread(r);
@@ -54,10 +57,8 @@ public class TcpClient {
     }
 
 
-    /**
-     * Sends the message entered by client to the server
-     *
-     * @param message text entered by client
+    /*
+     This func sends commands to the plane, using another thread.
      */
     public void sendMessage(final String message) {
 
@@ -85,8 +86,8 @@ public class TcpClient {
         Log.d(TAG, "message sent.");
     }
 
-    /**
-     * Close the connection and release the members
+    /*
+     Close the connection and release the members
      */
     public void stopClient() {
         try {
@@ -95,8 +96,6 @@ public class TcpClient {
             Log.e("TCP", "C: Error", e);
         }finally {
             try {
-
-
                 if (stream != null) {
                     stream.flush();
                     stream.close();

@@ -11,7 +11,13 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+/*
+ This window responsible of the joystick who controls the simulator.
+ Using the joystick the user can control the plane.
+ The joystick has few parameters: center, radius of the base circle, radius of the
+ small circle and joystick callback.
 
+ */
 public class JoystickView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
 
     private double centerX;
@@ -21,6 +27,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     private JoystickListener joystickCallback;
     private final int ratio = 5; //The smaller, the more shading will occur
 
+    /*
+     This function initialize the joystick members.
+     */
     void setupDimensions() {
         centerX = getWidth() / 2.0;
         centerY = getHeight() / 2.0;
@@ -28,6 +37,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         hatRaduis = Math.min(getWidth(), getHeight()) / 5.0;
     }
 
+    /*
+     This func draws the joystick on top of the screen.
+     */
     private void drawJoystick(double newX, double newY) {
         if (getHolder().getSurface().isValid()) {
             Canvas myCanvas = this.getHolder().lockCanvas(); //Stuff to draw
@@ -58,7 +70,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         }
     }
 
-
+    /*
+     This is the joystick constructor.
+     */
     public JoystickView(Context context) {
         super(context);
         getHolder().addCallback(this);
@@ -68,6 +82,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         }
     }
 
+    /*
+     This is the joystick constructor.
+     */
     public JoystickView(Context context, AttributeSet attrs) {
         super(context, attrs);
         getHolder().addCallback(this);
@@ -77,6 +94,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         }
     }
 
+    /*
+     This is the joystick constructor.
+    */
     public JoystickView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         getHolder().addCallback(this);
@@ -86,6 +106,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         }
     }
 
+    /*
+     This func creates the joystick surface, and draw it on the screen.
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         setupDimensions();
@@ -100,7 +123,10 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     public void surfaceDestroyed(SurfaceHolder holder) {
     }
 
-
+    /*
+        This func responsible of "listening" to screen motion,
+        detect and move the joystick as follows.
+    */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (view.equals(this)) {
@@ -128,6 +154,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         return true;
     }
 
+    /*
+     This interface got method that "listen" to the screen motion.
+     */
     public interface JoystickListener {
         void onJoystickMoved(float xPercent, float yPercent, int id);
     }

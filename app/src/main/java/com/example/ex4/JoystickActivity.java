@@ -6,10 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 
+/*
+ This activity responsible of drawing the second window.
+ This window shows the joystick waiting for movement.
+ */
 public class JoystickActivity extends AppCompatActivity implements JoystickView.JoystickListener {
 
     TcpClient tcpClient;
 
+
+    /*
+     This func get the ip and port inserted by the user and creates tcpClient
+     object to connect the server.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +33,9 @@ public class JoystickActivity extends AppCompatActivity implements JoystickView.
         tcpClient.connect();
     }
 
+    /*
+     This func send the command to the server.
+     */
     @Override
     public void onJoystickMoved(float aileron, float elevator, int id) {
         Log.d("Joystick", "X : " + aileron + " Y : " + elevator);
