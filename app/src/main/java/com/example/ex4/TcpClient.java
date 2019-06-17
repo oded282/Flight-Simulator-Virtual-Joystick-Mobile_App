@@ -2,10 +2,7 @@ package com.example.ex4;
 
 import android.util.Log;
 
-import java.io.BufferedWriter;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
