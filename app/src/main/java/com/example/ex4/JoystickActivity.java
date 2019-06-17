@@ -29,8 +29,8 @@ public class JoystickActivity extends AppCompatActivity implements JoystickView.
         Log.d("Joystick", "X : " + aileron + " Y : " + elevator);
 
 
-        tcpClient.sendMessage("set /controls/flight/elevator" + elevator );
-        tcpClient.sendMessage("set /controls/flight/aileron" + aileron);
+        tcpClient.sendMessage("set /controls/flight/elevator " + elevator );
+        tcpClient.sendMessage("set /controls/flight/aileron " + aileron);
 
 
     }

@@ -3,6 +3,7 @@ package com.example.ex4;
 import android.util.Log;
 
 import java.io.BufferedWriter;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -15,7 +16,7 @@ public class TcpClient {
     private String ip;
     private int port;
     private Socket socket;
-    private PrintWriter mBufferOut;
+    private OutputStream stream;
 
 
     public TcpClient(int port, String ip) {
@@ -29,15 +30,14 @@ public class TcpClient {
             public void run() {
                 try {
                     Log.d(TAG, ip + port);
-                    InetAddress serverAddr = InetAddress.getByName("10.0.0.2");
+                    InetAddress serverAddr = InetAddress.getByName(ip);
                     Log.d("TCP Client", serverAddr.toString());
                     Log.d("TCP Client", "C: Connecting...");
-                    socket = new Socket(serverAddr, 5402);
+                    socket = new Socket(serverAddr, port);
 
                     try {
                         Log.d("TCP Client", "create the buffer");
-                        mBufferOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
-                                socket.getOutputStream())), true);
+                        stream = socket.getOutputStream();
 
                     } catch (Exception e) {
                         Log.e("TCP", "S: Error", e);
@@ -60,14 +60,23 @@ public class TcpClient {
      * @param message text entered by client
      */
     public void sendMessage(final String message) {
+
+
+
         Log.d("TCP Client", "C: inside send message func");
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (mBufferOut != null) {
-                    Log.d(TAG, message + " /r/n");
-                    mBufferOut.write(message + " /r/n");
-                    mBufferOut.flush();
+                try {
+                if (stream != null) {
+                    String s = message + "\r\n";
+                    byte[] buf = s.getBytes();
+                    Log.d(TAG, s);
+                    stream.write(buf);
+                    stream.flush();
+                }
+                }catch (Exception e){
+                    Log.e("stream", "S: Error", e);
                 }
             }
         };
@@ -85,11 +94,17 @@ public class TcpClient {
         }catch (Exception e){
             Log.e("TCP", "C: Error", e);
         }finally {
-            if (mBufferOut != null) {
-                mBufferOut.flush();
-                mBufferOut.close();
+            try {
+
+
+                if (stream != null) {
+                    stream.flush();
+                    stream.close();
+                }
+            }catch (Exception e){
+                Log.e("stream", "S: Error", e);
             }
-            mBufferOut = null;
+            stream = null;
         }
     }
 }
