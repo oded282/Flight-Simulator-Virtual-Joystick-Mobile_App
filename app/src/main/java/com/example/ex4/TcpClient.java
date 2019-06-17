@@ -50,7 +50,6 @@ public class TcpClient {
         };
         Thread thread = new Thread(r);
         thread.start();
-
     }
 
 
