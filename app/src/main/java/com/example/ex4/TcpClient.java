@@ -33,7 +33,6 @@ public class TcpClient {
             @Override
             public void run() {
                 try {
-                    Log.d(TAG, ip + port);
                     InetAddress serverAddr = InetAddress.getByName(ip);
                     socket = new Socket(serverAddr, port);
 
@@ -59,8 +58,6 @@ public class TcpClient {
     public void sendMessage(final String message) {
 
 
-
-        Log.d("TCP Client", "C: inside send message func");
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -79,7 +76,6 @@ public class TcpClient {
         };
         Thread thread = new Thread(runnable);
         thread.start();
-        Log.d(TAG, "message sent.");
     }
 
     /*
