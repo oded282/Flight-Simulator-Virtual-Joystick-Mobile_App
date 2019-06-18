@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
 
 /*
  This activity responsible of drawing the second window.
@@ -31,6 +30,15 @@ public class JoystickActivity extends AppCompatActivity implements JoystickView.
 
         tcpClient = new TcpClient(port, ip);
         tcpClient.connect();
+    }
+
+    /*
+     This func destroy tcpClient connection when app exit the joystick screen.
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        tcpClient.stopClient();
     }
 
     /*
